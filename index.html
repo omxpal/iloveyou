@@ -22,6 +22,7 @@
             cursor: pointer;
             position: absolute;
             display: none;
+            z-index: 2; /* Ensure buttons are above the canvas */
         }
         
         #button1, #button2, #button3 {
@@ -55,6 +56,17 @@
             transform: translate(-50%, -50%);
         }
         
+        #message {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 20px;
+            line-height: 1.5;
+            display: none;
+        }
+
         .line {
             display: block;
             opacity: 0;
@@ -68,8 +80,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            pointer-events: none; /* Allow interaction with underlying elements */
+            z-index: 1; /* Ensure canvas is below buttons */
         }
     </style>
 </head>
@@ -79,15 +91,17 @@
     <button id="button3" class="button" onclick="showNextButton('button3', 'button4')">almost there...</button>
     <button id="button4" class="button" onclick="changeColorAndRemoveButton()">i'm here!</button>
 
- <div id="message">
+    <div id="message">
         <span class="line">congrats baby, you did it!</span>
         <span class="line">i just wanted to say....</span>
         <span class="line">that i love you very much</span>
         <span class="line">and i miss you pookie</span>
     </div>
 
+    <canvas id="confettiCanvas"></canvas>
+
     <script>
-    function showNextButton(currentButtonId, nextButtonId) {
+        function showNextButton(currentButtonId, nextButtonId) {
             document.getElementById(currentButtonId).style.display = "none";
             document.getElementById(nextButtonId).style.display = "block";
         }
@@ -95,75 +109,13 @@
         function changeColorAndRemoveButton() {
             document.body.style.backgroundColor = "#ffc0cb";
             document.getElementById("button4").remove();
-            launchConfetti(); // Start confetti after removing the button
+            // launchConfetti(); // Uncomment this when confetti function is fixed
         }
         
-        function launchConfetti() {
-            const canvas = document.getElementById('confettiCanvas');
-            const ctx = canvas.getContext('2d');
-            const particles = [];
-            const numParticles = 100;
-            const duration = 2000; // 2 seconds
-            let startTime;
-
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            function createParticle(x, y) {
-                return {
-                    x: x,
-                    y: y,
-                    size: Math.random() * 5 + 2,
-                    speedX: Math.random() * 10 - 5,
-                    speedY: Math.random() * -10,
-                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                };
-            }
-
-            function drawParticle(p) {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.fill();
-            }
-
-            function updateParticle(p) {
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.size *= 0.95;
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                particles.forEach(p => {
-                    drawParticle(p);
-                    updateParticle(p);
-                });
-
-                particles = particles.filter(p => p.size > 0.5);
-
-                if (Date.now() - startTime < duration) {
-                    requestAnimationFrame(animate);
-                } else {
-                    showMessage();
-                }
-            }
-
-            function startConfetti(x, y) {
-                for (let i = 0; i < numParticles; i++) {
-                    particles.push(createParticle(x, y));
-                }
-                startTime = Date.now();
-                animate();
-            }
-
-            const button = document.getElementById("button4");
-            const rect = button.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-            startConfetti(x, y);
-        }
+        // Function for confetti will be added later
+        // function launchConfetti() {
+        //    // Your confetti code here
+        // }
         
         function showMessage() {
             const message = document.getElementById("message");
