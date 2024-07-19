@@ -141,13 +141,13 @@
             for (let i = 0; i < lines.length; i++) {
                 setTimeout(() => {
                     lines[i].style.opacity = 1;
-                }, i * 3300); // 3 seconds delay between each line
+                }, i * 2000); // 3 seconds delay between each line
 
                 if (i === lines.length - 1) {
                     // After last line is shown, start showing images
                     setTimeout(() => {
                         showImages();
-                    }, (i + 1) * 3300 + 2000); // Added extra time to ensure the last line is fully visible
+                    }, (i + 1) * 2000 + 2000); // Added extra time to ensure the last line is fully visible
                 }
             }
         }
