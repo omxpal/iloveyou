@@ -3,3 +3,7 @@ document.getElementById('colorButton').addEventListener('click', function() {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     document.body.style.backgroundColor = randomColor;
 });
+document.getElementById('colorButton').addEventListener('click', function() {
+    document.body.style.backgroundColor = '#ffc0cb';
+    this.style.display = 'none';
+});
