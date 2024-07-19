@@ -86,9 +86,8 @@
         <span class="line">and i miss you pookie</span>
     </div>
 
- <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        function showNextButton(currentButtonId, nextButtonId) {
+    function showNextButton(currentButtonId, nextButtonId) {
             document.getElementById(currentButtonId).style.display = "none";
             document.getElementById(nextButtonId).style.display = "block";
         }
@@ -96,14 +95,16 @@
         function changeColorAndRemoveButton() {
             document.body.style.backgroundColor = "#ffc0cb";
             document.getElementById("button4").remove();
+            launchConfetti(); // Start confetti after removing the button
         }
         
-         function launchConfetti() {
+        function launchConfetti() {
             const canvas = document.getElementById('confettiCanvas');
             const ctx = canvas.getContext('2d');
             const particles = [];
             const numParticles = 100;
             const duration = 2000; // 2 seconds
+            let startTime;
 
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -145,7 +146,6 @@
                 if (Date.now() - startTime < duration) {
                     requestAnimationFrame(animate);
                 } else {
-                    document.getElementById("button4").remove();
                     showMessage();
                 }
             }
@@ -177,7 +177,7 @@
                 }, i * 3000); // 3 seconds delay between each line
             }
         }
-        }
+    </script>
     </script>
 </body>
 </html>
