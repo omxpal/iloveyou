@@ -126,7 +126,7 @@
             document.getElementById("button4").remove(); // Remove last button
 
             const audio = document.getElementById("audio");
-            audio.volume = 0.3; // Set volume to 50%
+            audio.volume = 0.2; // Set volume to 50%
             audio.play(); // Play the hosted audio file
 
             showMessage(); // Show the message
@@ -141,13 +141,13 @@
             for (let i = 0; i < lines.length; i++) {
                 setTimeout(() => {
                     lines[i].style.opacity = 1;
-                }, i * 2000); // 3 seconds delay between each line
+                }, i * 2400); // 3 seconds delay between each line
 
                 if (i === lines.length - 1) {
                     // After last line is shown, start showing images
                     setTimeout(() => {
                         showImages();
-                    }, (i + 1) * 2000 + 2000); // Added extra time to ensure the last line is fully visible
+                    }, (i + 1) * 2400 + 1000); // Added extra time to ensure the last line is fully visible
                 }
             }
         }
@@ -160,7 +160,7 @@
                 if (index < images.length) {
                     images[index].style.display = 'block';
                     index++;
-                    setTimeout(showNextImage, 7000); // Show next image every 2 seconds
+                    setTimeout(showNextImage, 5000); // Show next image every 2 seconds
                 }
             }
 
