@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I love you Tiff</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: white;
+            position: relative; 
+        }
+
+        .button {
+            padding: 20px 30px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+            display: none;
+            z-index: 2; /* Ensure buttons are above any other elements */
+        }
+        
+        #button1, #button2, #button3 {
+            background-color: black;
+        }
+
+        #button4 {
+            background-color: #d67e8e;
+            color: white;
+        }
+
+        #button1 {
+            top: 10px;
+            left: 10px;
+            display: block;
+        }
+
+        #button2 {
+            bottom: 20%;
+            left: 15%;
+        }
+
+        #button3 {
+            top: 30%;
+            right: 20%;
+        }
+
+        #button4 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        #message {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 20px;
+            line-height: 1.5;
+            display: none;
+            font-family: Arial, sans-serif; /* Changed font to Arial */
+            width: 80%; /* Make lines longer */
+            margin-bottom: 80px; /* Space for images below */
+        }
+
+        .line {
+            display: block;
+            opacity: 0;
+            margin-bottom: 30px; /* Doubled space between lines */
+            transition: opacity 1s;
+        }
+
+        /* Styling for images */
+        .image {
+            display: none;
+            width: 70%;
+            max-width: 400px;
+            margin: 20px auto;
+            border: 0.5px solid black;
+            position: absolute;
+            top: 60%; /* Start images 80% down from the top */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <button id="button1" class="button" onclick="showNextButton('button1', 'button2')">psst...over here</button>
+    <button id="button2" class="button" onclick="showNextButton('button2', 'button3')">whoops...missed me</button>
+    <button id="button3" class="button" onclick="showNextButton('button3', 'button4')">missed me again</button>
+    <button id="button4" class="button" onclick="playAudioAndShowMessage()">i'm here!</button>
+
+    <div id="message">
+        <span class="line">congrats baby, you did it!</span>
+        <span class="line">this took me a while lol</span>
+        <span class="line">but it was so worth it</span>
+        <span class="line">anyways, i just wanted to say...</span>
+        <span class="line">i love you very much</span>
+        <span class="line">and i miss you pookie</span>
+        <span class="line">i hope you enjoy the pictures!</span>
+    </div>
+
+    <!-- Image elements -->
+    <img id="image1" class="image" src="https://github.com/omxpal/iloveyou/raw/main/IMG_0457.HEIC" alt="Image 1">
+    <img id="image2" class="image" src="https://github.com/omxpal/iloveyou/raw/main/IMG_0458.HEIC" alt="Image 2">
+    <img id="image3" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_7516.JPG?raw=true" alt="Image 3">
+    <img id="image4" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_4946.JPG?raw=true" alt="Image 4">
+
+    <audio id="audio" src="https://github.com/omxpal/iloveyou/raw/main/Travis%20Scott%20-%20MY%20EYES%20(Official%20Audio).mp3"></audio>
+
+    <script>
+        function showNextButton(currentButtonId, nextButtonId) {
+            document.getElementById(currentButtonId).style.display = "none";
+            document.getElementById(nextButtonId).style.display = "block";
+        }
+        
+        function playAudioAndShowMessage() {
+            document.body.style.backgroundColor = "#ffc0cb"; // Change background color
+            document.getElementById("button4").remove(); // Remove last button
+
+            const audio = document.getElementById("audio");
+            audio.volume = 0.2; // Set volume to 50%
+            audio.play(); // Play the hosted audio file
+
+            showMessage(); // Show the message
+        }
+
+        function showMessage() {
+            const message = document.getElementById("message");
+            const lines = message.getElementsByClassName("line");
+
+            message.style.display = "block";
+
+            for (let i = 0; i < lines.length; i++) {
+                setTimeout(() => {
+                    lines[i].style.opacity = 1;
+                }, i * 2400); // 3 seconds delay between each line
+
+                if (i === lines.length - 1) {
+                    // After last line is shown, start showing images
+                    setTimeout(() => {
+                        showImages();
+                    }, (i + 1) * 2400 + 500); // Added extra time to ensure the last line is fully visible
+                }
+            }
+        }
+
+        function showImages() {
+            const images = document.getElementsByClassName('image');
+            let index = 0;
+
+            function showNextImage() {
+                if (index < images.length) {
+                    images[index].style.display = 'block';
+                    index++;
+                    setTimeout(showNextImage, 5000); // Show next image every 2 seconds
+                }
+            }
+
+            showNextImage(); // Start showing images after lines are done
+        }
+    </script>
+</body>
+</html>
