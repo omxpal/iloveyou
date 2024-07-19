@@ -85,9 +85,9 @@
             margin: 20px auto;
             border: 0.5px solid black;
             position: absolute;
-            top: 60%; /* Start images 80% down from the top */
+            top: 50%; /* Center vertically */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -126,7 +126,7 @@
             document.getElementById("button4").remove(); // Remove last button
 
             const audio = document.getElementById("audio");
-            audio.volume = 0.2; // Set volume to 50%
+            audio.volume = 0.2; // Set volume to 20%
             audio.play(); // Play the hosted audio file
 
             showMessage(); // Show the message
@@ -141,13 +141,14 @@
             for (let i = 0; i < lines.length; i++) {
                 setTimeout(() => {
                     lines[i].style.opacity = 1;
-                }, i * 2400); // 3 seconds delay between each line
+                }, i * 2400); // 2.4 seconds delay between each line
 
                 if (i === lines.length - 1) {
-                    // After last line is shown, start showing images
+                    // After last line is shown, hide message and show images
                     setTimeout(() => {
+                        message.style.display = "none";
                         showImages();
-                    }, (i + 1) * 2400 + 500); // Added extra time to ensure the last line is fully visible
+                    }, (i + 1) * 2400); // Ensure the last line is fully visible
                 }
             }
         }
@@ -160,7 +161,7 @@
                 if (index < images.length) {
                     images[index].style.display = 'block';
                     index++;
-                    setTimeout(showNextImage, 5000); // Show next image every 2 seconds
+                    setTimeout(showNextImage, 5000); // Show next image every 5 seconds
                 }
             }
 
