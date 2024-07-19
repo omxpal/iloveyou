@@ -81,7 +81,7 @@
     <button id="button1" class="button" onclick="showNextButton('button1', 'button2')">psst...over here</button>
     <button id="button2" class="button" onclick="showNextButton('button2', 'button3')">whoops...missed me</button>
     <button id="button3" class="button" onclick="showNextButton('button3', 'button4')">almost there...</button>
-    <button id="button4" class="button" onclick="showMessage()">i'm here!</button>
+    <button id="button4" class="button" onclick="playAudioAndShowMessage()">i'm here!</button>
 
     <div id="message">
         <span class="line">congrats baby, you did it!</span>
@@ -92,7 +92,8 @@
         <span class="line">and i miss you pookie</span>
         <span class="line">hope you enjoy the pictures!</span>
     </div>
-    <audio id="audio" src="https://github.com/omxpal/iloveyou/blob/4c62e2e5ed1453d92b73abaad050bf908dc01899/Travis%20Scott%20-%20MY%20EYES%20(Official%20Audio).mp3"></audio>
+
+    <audio id="audio" src="https://github.com/yourusername/yourrepository/raw/main/your-audio-file.mp3"></audio> <!-- Use a direct link -->
 
     <script>
         function showNextButton(currentButtonId, nextButtonId) {
@@ -100,7 +101,7 @@
             document.getElementById(nextButtonId).style.display = "block";
         }
         
-         function playAudioAndShowMessage() {
+        function playAudioAndShowMessage() {
             document.body.style.backgroundColor = "#ffc0cb"; // Change background color
             document.getElementById("button4").remove(); // Remove last button
 
@@ -119,7 +120,7 @@
             for (let i = 0; i < lines.length; i++) {
                 setTimeout(() => {
                     lines[i].style.opacity = 1;
-                }, i * 3300); // 3 seconds delay between each line
+                }, i * 3300); // 3.3 seconds delay between each line
             }
         }
     </script>
