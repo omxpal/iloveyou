@@ -92,8 +92,7 @@
         <span class="line">and i miss you pookie</span>
         <span class="line">hope you enjoy the pictures!</span>
     </div>
-
-    <audio id="audio" src="https://github.com/omxpal/iloveyou/raw/main/Travis%20Scott%20-%20MY%20EYES%20(Official%20Audio).mp3"></audio> <!-- Use a direct link -->
+    <audio id="audio" src="https://github.com/omxpal/iloveyou/raw/main/Travis%20Scott%20-%20MY%20EYES%20(Official%20Audio).mp3"></audio>
 
     <script>
         function showNextButton(currentButtonId, nextButtonId) {
@@ -106,6 +105,7 @@
             document.getElementById("button4").remove(); // Remove last button
 
             const audio = document.getElementById("audio");
+            audio.volume = 0.5; // Set volume to 50%
             audio.play(); // Play the hosted audio file
 
             showMessage(); // Show the message
@@ -120,7 +120,7 @@
             for (let i = 0; i < lines.length; i++) {
                 setTimeout(() => {
                     lines[i].style.opacity = 1;
-                }, i * 3300); // 3.3 seconds delay between each line
+                }, i * 2000); // 3 seconds delay between each line
             }
         }
     </script>
