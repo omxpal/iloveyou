@@ -89,6 +89,17 @@
             left: 50%;
             transform: translateX(-50%);
         }
+
+        /* Styling for GIF */
+        #gif {
+            display: none;
+            width: 100px; /* Adjust size as needed */
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1; /* Ensure the GIF is above other elements but below the buttons */
+        }
     </style>
 </head>
 <body>
@@ -113,6 +124,9 @@
     <img id="image3" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_7516.JPG?raw=true" alt="Image 3">
     <img id="image4" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_4946.JPG?raw=true" alt="Image 4">
 
+    <!-- GIF element -->
+    <img id="gif" src="https://github.com/omxpal/iloveyoutiff/blob/main/gif.gif?raw=true" alt="GIF">
+
     <audio id="audio" src="https://github.com/omxpal/iloveyou/raw/main/Travis%20Scott%20-%20MY%20EYES%20(Official%20Audio).mp3"></audio>
 
     <script>
@@ -130,6 +144,11 @@
             audio.play(); // Play the hosted audio file
 
             showMessage(); // Show the message
+
+            // Show the GIF after 10 seconds
+            setTimeout(() => {
+                document.getElementById("gif").style.display = 'block';
+            }, 10000); // 10000 ms = 10 seconds
         }
 
         function showMessage() {
@@ -148,6 +167,9 @@
                     setTimeout(() => {
                         message.style.display = "none";
                         setTimeout(showImages, 1000); // 1-second delay before showing images
+
+                        // Hide the GIF when the text goes away
+                        document.getElementById("gif").style.display = 'none';
                     }, (i + 1) * 2400); // Ensure the last line is fully visible
                 }
             }
