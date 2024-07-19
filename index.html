@@ -54,6 +54,23 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        
+        .line {
+            display: block;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        /* Canvas styling */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -81,33 +98,72 @@
             document.getElementById("button4").remove();
         }
          function launchConfetti() {
-            const duration = 2 * 1000; // 2 seconds
-            const end = Date.now() + duration;
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            const numParticles = 100;
+            const duration = 2000; // 2 seconds
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            function createParticle(x, y) {
+                return {
+                    x: x,
+                    y: y,
+                    size: Math.random() * 5 + 2,
+                    speedX: Math.random() * 10 - 5,
+                    speedY: Math.random() * -10,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                };
+            }
+
+            function drawParticle(p) {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            }
+
+            function updateParticle(p) {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.size *= 0.95;
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(p => {
+                    drawParticle(p);
+                    updateParticle(p);
+                });
+
+                particles = particles.filter(p => p.size > 0.5);
+
+                if (Date.now() - startTime < duration) {
+                    requestAnimationFrame(animate);
+                } else {
+                    document.getElementById("button4").remove();
+                    showMessage();
+                }
+            }
+
+            function startConfetti(x, y) {
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(createParticle(x, y));
+                }
+                startTime = Date.now();
+                animate();
+            }
+
             const button = document.getElementById("button4");
             const rect = button.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
-
-            (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: (x / window.innerWidth), y: (y / window.innerHeight) }
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: (x / window.innerWidth), y: (y / window.innerHeight) }
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                } else {
-                    document.getElementById("button4").remove();
-                }
-            }());
+            startConfetti(x, y);
+        }
+        
         function showMessage() {
             const message = document.getElementById("message");
             const lines = message.getElementsByClassName("line");
