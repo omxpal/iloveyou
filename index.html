@@ -62,6 +62,7 @@
     <button id="button3" class="button" onclick="showNextButton('button3', 'button4')">almost there...</button>
     <button id="button4" class="button" onclick="changeColorAndRemoveButton()">i'm here!</button>
 
+ <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         function showNextButton(currentButtonId, nextButtonId) {
             document.getElementById(currentButtonId).style.display = "none";
@@ -71,6 +72,35 @@
         function changeColorAndRemoveButton() {
             document.body.style.backgroundColor = "#ffc0cb";
             document.getElementById("button4").remove();
+        }
+         function launchConfetti() {
+            const duration = 2 * 1000; // 2 seconds
+            const end = Date.now() + duration;
+            const button = document.getElementById("button4");
+            const rect = button.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: (x / window.innerWidth), y: (y / window.innerHeight) }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: (x / window.innerWidth), y: (y / window.innerHeight) }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                } else {
+                    document.getElementById("button4").remove();
+                }
+            }());
         }
     </script>
 </body>
