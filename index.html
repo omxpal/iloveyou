@@ -67,7 +67,7 @@
             display: none;
             font-family: Arial, sans-serif; /* Changed font to Arial */
             width: 80%; /* Make lines longer */
-            margin-bottom: 120px; /* Space for images below */
+            margin-bottom: 80px; /* Space for images below */
         }
 
         .line {
@@ -85,7 +85,7 @@
             margin: 20px auto;
             border: 0.5px solid black;
             position: absolute;
-            top: 80%; /* Start images 80% down from the top */
+            top: 70%; /* Start images 80% down from the top */
             left: 50%;
             transform: translateX(-50%);
         }
@@ -160,7 +160,7 @@
                 if (index < images.length) {
                     images[index].style.display = 'block';
                     index++;
-                    setTimeout(showNextImage, 2000); // Show next image every 2 seconds
+                    setTimeout(showNextImage, 7000); // Show next image every 2 seconds
                 }
             }
 
