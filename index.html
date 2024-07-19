@@ -22,7 +22,7 @@
             cursor: pointer;
             position: absolute;
             display: none;
-            z-index: 2; /* Ensure buttons are above the canvas */
+            z-index: 2; /* Ensure buttons are above any other elements */
         }
         
         #button1, #button2, #button3 {
@@ -72,24 +72,13 @@
             opacity: 0;
             transition: opacity 1s;
         }
-
-        /* Canvas styling */
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Allow interaction with underlying elements */
-            z-index: 1; /* Ensure canvas is below buttons */
-        }
     </style>
 </head>
 <body>
     <button id="button1" class="button" onclick="showNextButton('button1', 'button2')">psst...over here</button>
     <button id="button2" class="button" onclick="showNextButton('button2', 'button3')">whoops...missed me</button>
     <button id="button3" class="button" onclick="showNextButton('button3', 'button4')">almost there...</button>
-    <button id="button4" class="button" onclick="changeColorAndRemoveButton()">i'm here!</button>
+    <button id="button4" class="button" onclick="showMessage()">i'm here!</button>
 
     <div id="message">
         <span class="line">congrats baby, you did it!</span>
@@ -98,26 +87,16 @@
         <span class="line">and i miss you pookie</span>
     </div>
 
-    <canvas id="confettiCanvas"></canvas>
-
     <script>
         function showNextButton(currentButtonId, nextButtonId) {
             document.getElementById(currentButtonId).style.display = "none";
             document.getElementById(nextButtonId).style.display = "block";
         }
 
-        function changeColorAndRemoveButton() {
-            document.body.style.backgroundColor = "#ffc0cb";
-            document.getElementById("button4").remove();
-            // launchConfetti(); // Uncomment this when confetti function is fixed
-        }
-        
-        // Function for confetti will be added later
-        // function launchConfetti() {
-        //    // Your confetti code here
-        // }
-        
         function showMessage() {
+            document.body.style.backgroundColor = "#ffc0cb"; // Change background color
+            document.getElementById("button4").remove(); // Remove last button
+
             const message = document.getElementById("message");
             const lines = message.getElementsByClassName("line");
 
