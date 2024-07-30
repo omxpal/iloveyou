@@ -22,7 +22,7 @@
             cursor: pointer;
             position: absolute;
             display: none;
-            z-index: 2; /* Ensure buttons are above any other elements */
+            z-index: 2;
         }
         
         #button1, #button2, #button3 {
@@ -65,19 +65,18 @@
             font-size: 20px;
             line-height: 1.5;
             display: none;
-            font-family: Arial, sans-serif; /* Changed font to Arial */
-            width: 80%; /* Make lines longer */
-            margin-bottom: 80px; /* Space for images below */
+            font-family: Arial, sans-serif;
+            width: 80%;
+            margin-bottom: 80px;
         }
 
         .line {
             display: block;
             opacity: 0;
-            margin-bottom: 30px; /* Doubled space between lines */
+            margin-bottom: 30px;
             transition: opacity 1s;
         }
 
-        /* Styling for images */
         .image {
             display: none;
             width: 70%;
@@ -85,20 +84,19 @@
             margin: 20px auto;
             border: 0.5px solid black;
             position: absolute;
-            top: 20%; /* Start images 40% down from the top */
+            top: 20%;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        /* Styling for GIF */
         #gif {
             display: none;
-            width: 200px; /* Adjust size as needed */
+            width: 200px;
             position: absolute;
             bottom: 70px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1; /* Ensure the GIF is above other elements but below the buttons */
+            z-index: 1;
         }
     </style>
 </head>
@@ -119,10 +117,18 @@
     </div>
 
     <!-- Image elements -->
-    <img id="image1" class="image" src="https://github.com/omxpal/iloveyou/raw/main/IMG_0457.HEIC" alt="Image 1">
-    <img id="image2" class="image" src="https://github.com/omxpal/iloveyou/raw/main/IMG_0458.HEIC" alt="Image 2">
-    <img id="image3" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_7516.JPG?raw=true" alt="Image 3">
-    <img id="image4" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_4946.JPG?raw=true" alt="Image 4">
+    <img id="image1" class="image" src="https://github.com/omxpal/iloveyoutiff/blob/main/IMG_3432.JPEG?raw=true" alt="Image 1">
+    <img id="image2" class="image" src="https://github.com/omxpal/iloveyou/raw/main/IMG_0457.HEIC" alt="Image 2">
+    <img id="image3" class="image" src="https://github.com/omxpal/iloveyou/raw/main/IMG_0458.HEIC" alt="Image 3">
+    <img id="image4" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_7516.JPG?raw=true" alt="Image 4">
+    <img id="image5" class="image" src="https://github.com/omxpal/iloveyou/blob/main/IMG_4946.JPG?raw=true" alt="Image 5">
+    <img id="image6" class="image" src="https://github.com/omxpal/iloveyoutiff/blob/main/IMG_1423.JPEG?raw=true" alt="Image 6">
+    <img id="image7" class="image" src="https://github.com/omxpal/iloveyoutiff/blob/main/IMG_4881.JPG?raw=true" alt="Image 7">
+    <img id="image8" class="image" src="https://github.com/omxpal/iloveyoutiff/raw/main/IMG_8723.HEIC" alt="Image 8">
+    <img id="image9" class="image" src="https://github.com/omxpal/iloveyoutiff/raw/main/IMG_8884.HEIC" alt="Image 9">
+    <img id="image10" class="image" src="https://github.com/omxpal/iloveyoutiff/raw/main/IMG_8894.HEIC" alt="Image 10">
+    <img id="image11" class="image" src="https://github.com/omxpal/iloveyoutiff/raw/main/IMG_9396.HEIC" alt="Image 11">
+    <img id="image12" class="image" src="https://github.com/omxpal/iloveyoutiff/raw/main/IMG_5903.HEIC" alt="Image 12">
 
     <!-- GIF element -->
     <img id="gif" src="https://github.com/omxpal/iloveyoutiff/blob/main/gif.gif?raw=true" alt="GIF">
@@ -136,19 +142,18 @@
         }
         
         function playAudioAndShowMessage() {
-            document.body.style.backgroundColor = "#ffc0cb"; // Change background color
-            document.getElementById("button4").remove(); // Remove last button
+            document.body.style.backgroundColor = "#ffc0cb";
+            document.getElementById("button4").remove();
 
             const audio = document.getElementById("audio");
-            audio.volume = 0.2; // Set volume to 20%
-            audio.play(); // Play the hosted audio file
+            audio.volume = 0.2;
+            audio.play();
 
-            showMessage(); // Show the message
+            showMessage();
 
-            // Show the GIF after 10 seconds
             setTimeout(() => {
                 document.getElementById("gif").style.display = 'block';
-            }, 10000); // 10000 ms = 10 seconds
+            }, 10000);
         }
 
         function showMessage() {
@@ -160,17 +165,14 @@
             for (let i = 0; i < lines.length; i++) {
                 setTimeout(() => {
                     lines[i].style.opacity = 1;
-                }, i * 2400); // 2.4 seconds delay between each line
+                }, i * 2400);
 
                 if (i === lines.length - 1) {
-                    // After last line is shown, hide message and show images
                     setTimeout(() => {
                         message.style.display = "none";
-                        setTimeout(showImages, 1000); // 1-second delay before showing images
-
-                        // Hide the GIF when the text goes away
+                        setTimeout(showImages, 1000);
                         document.getElementById("gif").style.display = 'none';
-                    }, (i + 1) * 2400); // Ensure the last line is fully visible
+                    }, (i + 1) * 2400);
                 }
             }
         }
@@ -183,11 +185,11 @@
                 if (index < images.length) {
                     images[index].style.display = 'block';
                     index++;
-                    setTimeout(showNextImage, 5000); // Show next image every 5 seconds
+                    setTimeout(showNextImage, 5000);
                 }
             }
 
-            showNextImage(); // Start showing images after lines are done
+            showNextImage();
         }
     </script>
 </body>
